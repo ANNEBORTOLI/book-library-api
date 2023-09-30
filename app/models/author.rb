@@ -1,3 +1,3 @@
-class Genre < ApplicationRecord
+class Author < ApplicationRecord
   validates :name, presence: true, uniqueness: true
 end
