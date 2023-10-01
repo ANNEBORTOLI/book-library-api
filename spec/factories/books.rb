@@ -1,7 +1,15 @@
 FactoryBot.define do
+  sequence :unique_title do |n|
+    "Book Title #{n}"
+  end
+
+  sequence :unique_publication_year do
+    (Date.today.year - 100) + rand(101)
+  end
+
   factory :book do
-    title { Faker::Book.title }
-    publication_year { Faker::Number.between(from: 0, to: Date.today.year) }
+    title { generate(:unique_title) }
+    publication_year { generate(:unique_publication_year) }
     genre { create(:genre) }
     author { create(:author) }
   end
