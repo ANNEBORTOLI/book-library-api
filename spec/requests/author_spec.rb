@@ -60,7 +60,7 @@ RSpec.describe "Authors", type: :request do
         expect(response).to have_http_status(200)
       end
       it "updates the author" do
-        updated_author = author.find(author.id)
+        updated_author = Author.find(author.id)
         expect(updated_author.name).to eq('Update test')
       end
     end
@@ -84,7 +84,7 @@ RSpec.describe "Authors", type: :request do
       end
 
       it "deletes the author" do
-        expect { author.find(author.id) }.to raise_error(ActiveRecord::RecordNotFound)
+        expect { Author.find(author.id) }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
 
