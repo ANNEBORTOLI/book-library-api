@@ -1,5 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Genre, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  subject { build(:genre) }
+
+  # Model validation tests
+  it { should validate_presence_of(:name) }
+  it { should validate_uniqueness_of(:name) }
 end

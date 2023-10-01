@@ -13,17 +13,6 @@
 # it.
 #
 # See https://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
-
-# require database_cleaner at the top level
-require 'database_cleaner'
-# configure shoulda matchers to use rspec as the test framework and full matcher libraries for rails
-Shoulda::Matchers.configure do |config|
-  config.integrate do |with|
-    with.test_framework :rspec
-    with.library :rails
- end
-end
-
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
@@ -46,21 +35,6 @@ RSpec.configure do |config|
     # a real object. This is generally recommended, and will default to
     # `true` in RSpec 4.
     mocks.verify_partial_doubles = true
-  end
-
-  # add `FactoryBot` methods
-  config.include FactoryBot::Syntax::Methods
-  # start by truncating all the tables but then use the faster transaction strategy the rest of the time.
-  config.before(:suite) do
-    DatabaseCleaner.clean_with(:truncation)
-    DatabaseCleaner.strategy = :transaction
-  end
-
-  # start the transaction strategy as examples are run
-  config.around(:each) do |example|
-    DatabaseCleaner.cleaning do
-      example.run
-    end
   end
 
   # This option will default to `:apply_to_host_groups` in RSpec 4 (and will
