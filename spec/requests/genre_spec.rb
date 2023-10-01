@@ -18,16 +18,17 @@ RSpec.describe "Genres", type: :request do
     end
   end
 
-    # Test suite for GET /genres/:id
-    describe "GET /genres/:id" do
-      # make HTTP get request before each example
-      before { get "/api/v1/genres/#{genre.id}" }
-      it 'returns one genre based on its id' do
-        expect(json).not_to be_empty
-        expect(json).to eq(:genre)
-      end
-      it 'returns status code 200' do
-        expect(response).to have_http_status(200)
-      end
+  # Test suite for GET /genres/:id
+  describe "GET /genres/:id" do
+    # make HTTP get request before each example
+    before { get "/api/v1/genres/#{genre.id}" }
+    it 'returns one genre based on its id' do
+      expect(json).not_to be_empty
+      expect(json["id"]).to eq(genre.id)
+      expect(json["name"]).to eq(genre.name)
     end
+    it 'returns status code 200' do
+      expect(response).to have_http_status(200)
+    end
+  end
 end
