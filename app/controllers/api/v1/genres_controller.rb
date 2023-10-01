@@ -25,7 +25,7 @@ class Api::V1::GenresController < ApplicationController
   end
 
   def render_error
-    render json: { errors: @restaurant.errors.full_messages },
-      status: :unprocessable_entity #422
+    render json: { errors: @genre.errors.full_messages },
+    status: :unprocessable_entity #422
   end
 end

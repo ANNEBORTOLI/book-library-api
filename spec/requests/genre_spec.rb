@@ -31,4 +31,28 @@ RSpec.describe "Genres", type: :request do
       expect(response).to have_http_status(200)
     end
   end
+
+  # Test suite for PATCH /genres/:id
+  describe "PATCH /genres/:id" do
+    let(:valid_attributes) {{ genre: { name: 'Update test' }}}
+    before { patch "/api/v1/genres/#{genre.id}", params: valid_attributes }
+
+    context 'when genre exists' do
+      it "returns status code 200" do
+        expect(response).to have_http_status(200)
+      end
+      it "updates the genre" do
+        updated_genre = Genre.find(genre.id)
+        expect(updated_genre.name).to eq('Update test')
+      end
+    end
+
+    context 'when the genre does not exist' do
+      let(:genre_invalid_id) { 0 }
+      before { patch "/api/v1/genres/#{genre_invalid_id}", params: valid_attributes }
+      it 'returns status code 404' do
+        expect(response).to have_http_status(404)
+      end
+    end
+  end
 end
