@@ -85,4 +85,26 @@ RSpec.describe "Books", type: :request do
       end
     end
   end
+
+    # Test suite for DELETE /books/:id
+    describe 'DELETE api/v1/books/:id' do
+      before { delete "/api/v1/books/#{book.id}" }
+
+      context 'when book exists' do
+        it 'returns status code 204' do
+          expect(response).to have_http_status(204)
+        end
+
+        it "deletes the book" do
+          expect { Book.find(book.id) }.to raise_error(ActiveRecord::RecordNotFound)
+        end
+      end
+
+      context 'when the book does not exist' do
+        before { patch "/api/v1/books/#{book.id}" }
+        it 'returns status code 404' do
+          expect(response).to have_http_status(404)
+        end
+      end
+    end
 end
