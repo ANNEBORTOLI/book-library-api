@@ -32,6 +32,24 @@ RSpec.describe "Genres", type: :request do
     end
   end
 
+  # Test suite for POST /genres
+  describe 'POST /api/v1/genres' do
+    let(:valid_attributes) { { name: 'new genre'} }
+
+    context 'when request attributes are valid' do
+      before { post '/api/v1/genres', params: valid_attributes }
+      it 'returns status code 201' do
+        expect(response).to have_http_status(201)
+      end
+    end
+    context 'when an invalid request' do
+      before { post '/api/v1/genres', params: {} }
+      it 'returns status code 422' do
+        expect(response).to have_http_status(422)
+      end
+    end
+  end
+
   # Test suite for PATCH /genres/:id
   describe "PATCH /api/v1/genres/:id" do
     let(:valid_attributes) {{ genre: { name: 'Update test' }}}
