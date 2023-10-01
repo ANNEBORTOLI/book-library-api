@@ -34,7 +34,7 @@ RSpec.describe "Genres", type: :request do
 
   # Test suite for POST /genres
   describe 'POST /api/v1/genres' do
-    let(:valid_attributes) { { name: 'new genre'} }
+    let(:valid_attributes) { { genre: { name: 'new genre'} } }
 
     context 'when request attributes are valid' do
       before { post '/api/v1/genres', params: valid_attributes }
@@ -43,7 +43,7 @@ RSpec.describe "Genres", type: :request do
       end
     end
     context 'when an invalid request' do
-      before { post '/api/v1/genres', params: {} }
+      before { post '/api/v1/genres', params: { genre: { name: ""} } }
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
       end

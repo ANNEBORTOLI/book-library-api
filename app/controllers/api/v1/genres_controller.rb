@@ -8,6 +8,15 @@ class Api::V1::GenresController < ApplicationController
   def show
   end
 
+  def create
+    @genre = Genre.new(genre_params)
+    if @genre.save
+      render :show, status: :created #201
+    else
+      render_error
+    end
+  end
+
   def update
     if @genre.update(genre_params)
       render :show
