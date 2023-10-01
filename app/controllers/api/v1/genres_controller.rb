@@ -9,6 +9,11 @@ class Api::V1::GenresController < ApplicationController
   end
 
   def update
+    if @genre.update(genre_params)
+      render :show
+    else
+      render_error
+    end
   end
 
   def destroy
@@ -17,7 +22,11 @@ class Api::V1::GenresController < ApplicationController
   private
 
   def set_genre
-    @genre = Genre.find(params[:id])
+    begin
+      @genre = Genre.find(params[:id])
+    rescue ActiveRecord::RecordNotFound => e
+      render json: { errors: 'Genre not found' }, status: :not_found
+    end
   end
 
   def genre_params
