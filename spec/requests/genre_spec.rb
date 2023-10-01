@@ -6,7 +6,7 @@ RSpec.describe "Genres", type: :request do
   let!(:genre) { genres.first }
 
   # Test suite for GET /genres
-  describe "GET /genres" do
+  describe "GET api/v1/genres" do
     # make HTTP get request before each example
     before { get '/api/v1/genres' }
     it 'returns genres' do
@@ -19,7 +19,7 @@ RSpec.describe "Genres", type: :request do
   end
 
   # Test suite for GET /genres/:id
-  describe "GET /genres/:id" do
+  describe "GET /api/v1/genres/:id" do
     # make HTTP get request before each example
     before { get "/api/v1/genres/#{genre.id}" }
     it 'returns one genre based on its id' do
@@ -33,7 +33,7 @@ RSpec.describe "Genres", type: :request do
   end
 
   # Test suite for PATCH /genres/:id
-  describe "PATCH /genres/:id" do
+  describe "PATCH /api/v1/genres/:id" do
     let(:valid_attributes) {{ genre: { name: 'Update test' }}}
     before { patch "/api/v1/genres/#{genre.id}", params: valid_attributes }
 
@@ -50,6 +50,28 @@ RSpec.describe "Genres", type: :request do
     context 'when the genre does not exist' do
       let(:genre_invalid_id) { 0 }
       before { patch "/api/v1/genres/#{genre_invalid_id}", params: valid_attributes }
+      it 'returns status code 404' do
+        expect(response).to have_http_status(404)
+      end
+    end
+  end
+
+  # Test suite for DELETE /genres/:id
+  describe 'DELETE api/v1/genres/:id' do
+    before { delete "/api/v1/genres/#{genre.id}" }
+
+    context 'when genre exists' do
+      it 'returns status code 204' do
+        expect(response).to have_http_status(204)
+      end
+
+      it "deletes the genre" do
+        expect { Genre.find(genre.id) }.to raise_error(ActiveRecord::RecordNotFound)
+      end
+    end
+
+    context 'when the genre does not exist' do
+      before { patch "/api/v1/genres/#{genre.id}" }
       it 'returns status code 404' do
         expect(response).to have_http_status(404)
       end
