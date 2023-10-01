@@ -17,6 +17,8 @@ class Api::V1::GenresController < ApplicationController
   end
 
   def destroy
+    @genre.destroy
+    head :no_content
   end
 
   private
