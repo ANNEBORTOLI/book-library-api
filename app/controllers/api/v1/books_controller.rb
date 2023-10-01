@@ -8,12 +8,26 @@ class Api::V1::BooksController < ApplicationController
   def show
   end
 
+  def create
+    @book = Book.new(book_params)
+    if @book.save
+      render :show, status: :created #201
+    else
+      render_error
+    end
+  end
+
   def update
     if @book.update(book_params)
       render :show
     else
       render_error
     end
+  end
+
+  def destroy
+    @book.destroy
+    head :no_content
   end
 
   private

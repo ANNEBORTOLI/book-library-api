@@ -19,6 +19,26 @@ RSpec.describe "Books", type: :request do
     end
   end
 
+  # Test suite for POST /books
+  describe 'POST /api/v1/books' do
+    let(:author) { create(:author) }
+    let(:genre) { create(:genre) }
+    let(:valid_attributes) { { book: { title: 'new title', publication_year: 200, genre_id: genre.id, author_id: author.id } } }
+
+    context 'when request attributes are valid' do
+      before { post '/api/v1/books', params: valid_attributes }
+      it 'returns status code 201' do
+        expect(response).to have_http_status(201)
+      end
+    end
+    context 'when an invalid request' do
+      before { post '/api/v1/books', params: { book: { title: ""} } }
+      it 'returns status code 422' do
+        expect(response).to have_http_status(422)
+      end
+    end
+  end
+
   # Test suite for GET /books/:id
   describe "GET /api/v1/books/:id" do
     # make HTTP get request before each example
