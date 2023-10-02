@@ -105,6 +105,7 @@ Below are the instructions for the installation, configuration, and use of the p
 
 ```sh
    git clone https://github.com/ANNEBORTOLI/book-library-api
+   cd book-library-api
 ```
 
 2. Installing Packages(gems)
