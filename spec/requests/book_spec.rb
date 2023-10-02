@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "Books", type: :request do
-
+  # initialize test data
+  let(:user) { create(:user) }
   let!(:books) { create_list(:book, 5) }
   let!(:book) { books.first }
 
@@ -25,12 +26,14 @@ RSpec.describe "Books", type: :request do
     let(:valid_attributes) { { book: { title: 'new title', publication_year: 200, genre_id: genre.id, author_id: author.id } } }
 
     context 'when request attributes are valid' do
+      before { sign_in user }
       before { post '/api/v1/books', params: valid_attributes }
       it 'returns status code 201' do
         expect(response).to have_http_status(201)
       end
     end
     context 'when an invalid request' do
+      before { sign_in user }
       before { post '/api/v1/books', params: { book: { title: ""} } }
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -70,6 +73,7 @@ RSpec.describe "Books", type: :request do
         genre_id: genre.id
       }
     end
+    before { sign_in user }
     before { patch "/api/v1/books/#{book.id}", params: { id: book.id, book: valid_attributes } }
     context 'when book exists' do
       it "returns status code 200" do
@@ -87,6 +91,7 @@ RSpec.describe "Books", type: :request do
 
     # Test suite for DELETE /books/:id
     describe 'DELETE api/v1/books/:id' do
+      before { sign_in user }
       before { delete "/api/v1/books/#{book.id}" }
 
       context 'when book exists' do
@@ -100,6 +105,7 @@ RSpec.describe "Books", type: :request do
       end
 
       context 'when the book does not exist' do
+        before { sign_in user }
         before { patch "/api/v1/books/#{book.id}" }
         it 'returns status code 404' do
           expect(response).to have_http_status(404)

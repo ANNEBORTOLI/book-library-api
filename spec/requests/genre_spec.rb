@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Genres", type: :request do
   # initialize test data
+  let(:user) { create(:user) }
   let!(:genres) { create_list(:genre, 5) }
   let!(:genre) { genres.first }
 
@@ -37,12 +38,14 @@ RSpec.describe "Genres", type: :request do
     let(:valid_attributes) { { genre: { name: 'new genre'} } }
 
     context 'when request attributes are valid' do
+      before { sign_in user }
       before { post '/api/v1/genres', params: valid_attributes }
       it 'returns status code 201' do
         expect(response).to have_http_status(201)
       end
     end
     context 'when an invalid request' do
+      before { sign_in user }
       before { post '/api/v1/genres', params: { genre: { name: ""} } }
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -53,6 +56,7 @@ RSpec.describe "Genres", type: :request do
   # Test suite for PATCH /genres/:id
   describe "PATCH /api/v1/genres/:id" do
     let(:valid_attributes) {{ genre: { name: 'Update test' }}}
+    before { sign_in user }
     before { patch "/api/v1/genres/#{genre.id}", params: valid_attributes }
 
     context 'when genre exists' do
@@ -67,6 +71,7 @@ RSpec.describe "Genres", type: :request do
 
     context 'when the genre does not exist' do
       let(:genre_invalid_id) { 0 }
+      before { sign_in user }
       before { patch "/api/v1/genres/#{genre_invalid_id}", params: valid_attributes }
       it 'returns status code 404' do
         expect(response).to have_http_status(404)
@@ -76,6 +81,7 @@ RSpec.describe "Genres", type: :request do
 
   # Test suite for DELETE /genres/:id
   describe 'DELETE api/v1/genres/:id' do
+    before { sign_in user }
     before { delete "/api/v1/genres/#{genre.id}" }
 
     context 'when genre exists' do
@@ -89,6 +95,7 @@ RSpec.describe "Genres", type: :request do
     end
 
     context 'when the genre does not exist' do
+      before { sign_in user }
       before { patch "/api/v1/genres/#{genre.id}" }
       it 'returns status code 404' do
         expect(response).to have_http_status(404)

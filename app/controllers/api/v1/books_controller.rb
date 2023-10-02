@@ -1,4 +1,5 @@
 class Api::V1::BooksController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show, :search]
   before_action :set_book, only: [ :show, :update, :destroy ]
 
   def index
