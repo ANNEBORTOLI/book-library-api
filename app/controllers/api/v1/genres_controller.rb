@@ -34,11 +34,9 @@ class Api::V1::GenresController < ApplicationController
   private
 
   def set_genre
-    begin
-      @genre = Genre.find(params[:id])
-    rescue ActiveRecord::RecordNotFound => e
+    @genre = Genre.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
       render json: { errors: 'Genre not found' }, status: :not_found
-    end
   end
 
   def genre_params

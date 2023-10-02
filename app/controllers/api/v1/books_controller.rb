@@ -39,12 +39,11 @@ class Api::V1::BooksController < ApplicationController
 
     @books = Book.all
     @books = @books.where('title ILIKE ?', "%#{title}%") if title.present?
-    @books = @books.where(publication_year: publication_year) if publication_year.present?
+    @books = @books.where(publication_year) if publication_year.present?
 
     if author_name.present?
       @books = @books.joins(:author).where('authors.name ILIKE ?', "%#{author_name}%")
     end
-
     if genre_name.present?
       @books = @books.joins(:genre).where('genres.name ILIKE ?', "%#{genre_name}%")
     end
@@ -55,11 +54,9 @@ class Api::V1::BooksController < ApplicationController
   private
 
   def set_book
-    begin
-      @book = Book.find(params[:id])
-    rescue ActiveRecord::RecordNotFound => e
+    @book = Book.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
       render json: { errors: 'Book not found' }, status: :not_found
-    end
   end
 
   def book_params
