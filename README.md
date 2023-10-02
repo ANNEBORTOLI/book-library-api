@@ -12,14 +12,14 @@
     </li>
     <ul>
         <li><a href="#business-rules">Business rules</a></li>
-        <li><a href="#database-squema">Database Squema</a></li>
+        <li><a href="#database-schema">Database Schema</a></li>
         <li><a href="#api-endpoints">API Endpoints</a></li>
     </ul>
     </li>
     <li>
-      <a href="#instruções-gerais">General Instructions</a>
+      <a href="#general-instructions">General Instructions</a>
       <ul>
-        <li><a href="#instalação">Installation</a></li>
+        <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
     </li>
@@ -32,14 +32,14 @@
 
 <!-- ABOUT THE PROJECT -->
 
-## :notebook_with_decorative_cover: About the project
+## :notebook_with_decorative_cover:About the project
 
 This is an API Rest developed using TDD in Ruby on Rails that allows team members to add books to a shared list and also query books based on specific parameters.
 
 For this application it was used JWT (JSON Web Token) approach for authentication management.
 Devise and Devise-JWT were used to manage authentication and authorization.
 
-### 🛠️ Technologies
+### 🛠️Technologies
 
 <ul>
   <li>Ruby 3.1.2</li>
@@ -62,13 +62,13 @@ Devise and Devise-JWT were used to manage authentication and authorization.
 - All logged Users can update a book (authenticated);
 - All logged Users delete books (authenticated);
 
-### :card_file_box: Database Squema
+### :card_file_box:Database Schema
 
 <div align="center">
   <img src="public/db-pic.png">
 </div>
 
-### :truck: Endpoints
+### :truck:Endpoints
 
 - User Endpoints
 
@@ -111,11 +111,11 @@ Devise and Devise-JWT were used to manage authentication and authorization.
 
 <!-- GETTING STARTED -->
 
-## :book: General instructions
+## :book:General instructions
 
 Below are the instructions for the installation, configuration, and use of the project's API.
 
-### :electric_plug: Installation
+### :electric_plug:Installation
 
 1. Clone the repo
 
@@ -127,10 +127,6 @@ Below are the instructions for the installation, configuration, and use of the p
 
 ```sh
     bundle install
-```
-
-```sh
-    rails g devise:install
 ```
 
 3. Remove the current credentials encrypted file, in order to add yours
@@ -201,9 +197,9 @@ devise_jwt_secret_key: (copy and paste the generated secret here)
 
 - To update a book you only need to provide the attributes you want to change.
 
-## :book: Usage Examples
+## :book:Usage Examples
 
-### :camera_flash: Testing with Insomnia
+### :camera_flash:Testing with Insomnia
 
 - Creating User:
 <div align="center">
