@@ -129,7 +129,17 @@ Below are the instructions for the installation, configuration, and use of the p
     bundle install
 ```
 
-3 - Generate the devise-jwt secret
+```sh
+    rails g devise:install
+```
+
+3. Remove the current credentials encrypted file, in order to add yours
+
+```sh
+   rm config/credentials.yml.enc
+```
+
+4. Generate the devise-jwt secret
 
 - In the terminal type:
 
@@ -152,25 +162,25 @@ EDITOR='code --wait' rails credentials:edit
 devise_jwt_secret_key: (copy and paste the generated secret here)
 ```
 
-4. Create a db, run migrations and run seed
+5. Create a db, run migrations and run seed
 
 ```sh
     rails db:create db:migrate db:seed
 ```
 
-4. Run tests
+6. Run tests
 
 ```sh
     bundle exec rspec
 ```
 
-6. Run API locally
+7. Run API locally
 
 ```sh
     rails s
 ```
 
-7. Test the endpoints with Insomnia / Postman
+8. Test the endpoints with Insomnia / Postman
 
 - Use the login provided by the seeds file or sign up with a new one to test authenticated routes.
 
