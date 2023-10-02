@@ -1,10 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe "Books", type: :request do
-  # initialize test data
+
   let!(:books) { create_list(:book, 5) }
   let!(:book) { books.first }
-
 
   # Test suite for GET /books
   describe "GET api/v1/books" do
@@ -43,7 +42,7 @@ RSpec.describe "Books", type: :request do
   describe "GET /api/v1/books/:id" do
     # make HTTP get request before each example
     before { get "/api/v1/books/#{book.id}" }
-    it 'returns one genre based on its id' do
+    it 'returns one book based on its id' do
       expect(json).not_to be_empty
       expect(json["id"]).to eq(book.id)
       expect(json["title"]).to eq(book.title)

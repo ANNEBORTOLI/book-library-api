@@ -30,6 +30,27 @@ class Api::V1::BooksController < ApplicationController
     head :no_content
   end
 
+  def search
+    title = params[:title]
+    publication_year = params[:publication_year]
+    author_name = params[:author_name]
+    genre_name = params[:genre_name]
+
+    @books = Book.all
+    @books = @books.where('title ILIKE ?', "%#{title}%") if title.present?
+    @books = @books.where(publication_year: publication_year) if publication_year.present?
+
+    if author_name.present?
+      @books = @books.joins(:author).where('authors.name ILIKE ?', "%#{author_name}%")
+    end
+
+    if genre_name.present?
+      @books = @books.joins(:genre).where('genres.name ILIKE ?', "%#{genre_name}%")
+    end
+
+    render :search
+  end
+
   private
 
   def set_book
