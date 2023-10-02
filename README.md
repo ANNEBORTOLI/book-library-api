@@ -129,7 +129,30 @@ Below are the instructions for the installation, configuration, and use of the p
     bundle install
 ```
 
-3. Create a db, run migrations and run seed
+3 - Generate the devise-jwt secret
+
+- In the terminal type:
+
+```sh
+    bundle exec rake secret
+```
+
+- Add it to the encrypted credentials:
+
+```sh
+# VsCode
+EDITOR='code --wait' rails credentials:edit
+```
+
+- Add a new key: value in the encrypted.yml file
+
+```sh
+# Change the name for 'devise_jwt_secret_key'
+# Used as the base secret for Devise-JWT
+devise_jwt_secret_key: (copy and paste the generated secret here)
+```
+
+4. Create a db, run migrations and run seed
 
 ```sh
     rails db:create db:migrate db:seed
