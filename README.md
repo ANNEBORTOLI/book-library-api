@@ -1,34 +1,18 @@
 # Book Library API
 
 <!-- TABLE OF CONTENTS -->
-<details open="open">
-  <summary>TABLE OF CONTENTS</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About the Project</a>
-      <ul>
-        <li><a href="#technologies">Technologies</a></li>
-      </ul>
-    </li>
-    <ul>
-        <li><a href="#business-rules">Business rules</a></li>
-        <li><a href="#database-schema">Database Schema</a></li>
-        <li><a href="#api-endpoints">API Endpoints</a></li>
-    </ul>
-    </li>
-    <li>
-      <a href="#general-instructions">General Instructions</a>
-      <ul>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    </li>
-    <li><a href="#usage-examples">Usage Examples</a></li>
-      <ul><li><a href="#testing-with-insomnia">Testing with Insomnia</a></li></ul>
-    </li>
-    </li>
-  </ol>
-</details>
+
+## Table of Contents
+
+- [:notebook_with_decorative_cover:About the project](#notebook_with_decorative_coverabout-the-project)
+  - [🛠️Technologies](#🛠️technologies)
+  - [📑Business rules](#�business-rules)
+  - [:card_file_box:Database Schema](#card_file_boxdatabase-schema)
+  - [:truck:Endpoints](#truckendpoints)
+- [:book:General instructions](#bookgeneral-instructions)
+  - [:electric_plug:Installation](#electric_pluginstallation)
+- [:book:Usage Examples](#bookusage-examples)
+  - [:camera_flash:Testing with Insomnia](#camera_flashtesting-with-insomnia)
 
 <!-- ABOUT THE PROJECT -->
 
