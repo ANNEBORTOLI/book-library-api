@@ -164,13 +164,13 @@ devise_jwt_secret_key: (copy and paste the generated secret here)
     bundle exec rspec
 ```
 
-5. Run API locally
+6. Run API locally
 
 ```sh
     rails s
 ```
 
-6. Test the endpoints with Insomnia / Postman
+7. Test the endpoints with Insomnia / Postman
 
 - Use the login provided by the seeds file or sign up with a new one to test authenticated routes.
 
