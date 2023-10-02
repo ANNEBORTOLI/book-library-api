@@ -120,7 +120,7 @@ Below are the instructions for the installation, configuration, and use of the p
 1. Clone the repo
 
 ```sh
-   git clone https://github.com/ANNEBORTOLI/...
+   git clone https://github.com/ANNEBORTOLI/book-library-api
 ```
 
 2. Installing Packages(gems)
